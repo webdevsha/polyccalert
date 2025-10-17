@@ -4,7 +4,6 @@ import PostCreation from './components/PostCreation';
 import PostFeed from './components/PostFeed';
 import MapDashboard from './components/MapDashboard';
 import Profile from './components/Profile';
-import LocalMap from './components/LocalMap';
 import { Post } from './types';
 import { mockPosts as initialMockPosts } from './utils/mockData';
 
@@ -19,8 +18,6 @@ function App() {
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'map':
-        return <LocalMap />;
       case 'feed':
         return <PostFeed posts={posts} />;
       case 'profile':

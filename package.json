@@ -1,9 +1,8 @@
 {
-  "name": "polyccalert",
+  "name": "vite-react-typescript-starter",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://webdevsha.github.io/polyccalert/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -11,9 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/leaflet": "^1.9.8",
-    "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",

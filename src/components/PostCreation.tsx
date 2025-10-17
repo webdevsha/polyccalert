@@ -38,8 +38,8 @@ const PostCreation: React.FC<PostCreationProps> = ({ isOpen, onClose, onSubmit }
       images: selectedFiles.filter(f => f.type.startsWith('image/')).map(f => URL.createObjectURL(f)),
       videos: selectedFiles.filter(f => f.type.startsWith('video/')).map(f => URL.createObjectURL(f)),
       location: {
-        lat: 2.167381021030418 + (Math.random() - 0.5) * 0.005, // Random location near polytechnic
-        lng: 102.4304150369611 + (Math.random() - 0.5) * 0.005,
+        lat: 2.2685 + (Math.random() - 0.5) * 0.01, // Random location near polytechnic
+        lng: 102.2656 + (Math.random() - 0.5) * 0.01,
         address: location
       },
       category: selectedCategory!,

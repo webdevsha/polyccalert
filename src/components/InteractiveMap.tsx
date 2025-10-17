@@ -4,16 +4,13 @@ import { Icon, LatLngExpression } from 'leaflet';
 import { Navigation, Layers, MapPin, Clock, User } from 'lucide-react';
 import { Post } from '../types';
 import 'leaflet/dist/leaflet.css';
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 // Fix for default markers in react-leaflet
 delete (Icon.Default.prototype as any)._getIconUrl;
 Icon.Default.mergeOptions({
-  iconRetinaUrl: markerIcon2x,
-  iconUrl: markerIcon,
-  shadowUrl: markerShadow,
+  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
 // Custom marker icons for different statuses
@@ -51,13 +48,13 @@ const LocationButton: React.FC = () => {
         },
         (error) => {
           console.error('Error getting location:', error);
-          // Fallback to actual Merlimau Polytechnic coordinates
-          map.setView([2.167381021030418, 102.4304150369611], 16);
+          // Fallback to Merlimau Polytechnic coordinates
+          map.setView([2.2685, 102.2656], 16);
         }
       );
     } else {
-      // Fallback to actual Merlimau Polytechnic coordinates
-      map.setView([2.167381021030418, 102.4304150369611], 16);
+      // Fallback to Merlimau Polytechnic coordinates
+      map.setView([2.2685, 102.2656], 16);
     }
   };
 
@@ -79,8 +76,8 @@ interface InteractiveMapProps {
 const InteractiveMap: React.FC<InteractiveMapProps> = ({ posts }) => {
   const [selectedPost, setSelectedPost] = useState<any>(null);
   
-  // Actual Merlimau Polytechnic coordinates
-  const center: LatLngExpression = [2.167381021030418, 102.4304150369611];
+  // Merlimau Polytechnic coordinates
+  const center: LatLngExpression = [2.2685, 102.2656];
 
   const formatTimeAgo = (timestamp: string) => {
     const now = new Date();
@@ -116,48 +113,38 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ posts }) => {
               click: () => setSelectedPost(post),
             }}
           >
-            <Popup className="custom-popup" maxWidth={350} minWidth={300}>
-              <div className="p-4 min-w-[300px]">
-                {/* User Header */}
+            <Popup className="custom-popup">
+              <div className="p-2 min-w-[250px]">
                 <div className="flex items-center space-x-2 mb-2">
                   <img
                     src={post.user.avatar}
                     alt={post.user.name}
-                    className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
+                    className="w-8 h-8 rounded-full object-cover"
                   />
                   <div>
-                    <p className="font-bold text-base text-gray-900">{post.user.name}</p>
-                    <p className="text-sm text-gray-600">{post.user.role}</p>
+                    <p className="font-semibold text-sm">{post.user.name}</p>
+                    <p className="text-xs text-gray-500">{post.user.role}</p>
                   </div>
                 </div>
                 
-                {/* Content */}
-                <p className="text-sm text-gray-800 mb-3 leading-relaxed">
+                <p className="text-sm text-gray-800 mb-2 line-clamp-3">
                   {post.content}
                 </p>
                 
-                {/* Category */}
-                <div className="flex items-center space-x-2 mb-3">
+                <div className="flex items-center space-x-2 mb-2">
                   <div className={`w-3 h-3 rounded-full ${post.category.color}`}></div>
-                  <span className="text-sm font-semibold text-gray-800">{post.category.name}</span>
+                  <span className="text-xs font-medium text-gray-700">{post.category.name}</span>
                 </div>
                 
-                {/* Location */}
-                <div className="flex items-center space-x-2 mb-3">
-                  <MapPin className="w-4 h-4 text-gray-500" />
-                  <span className="text-sm text-gray-600">{post.location.address}</span>
-                </div>
-                
-                {/* Timestamp and Status */}
-                <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center justify-between text-xs text-gray-500">
                   <div className="flex items-center space-x-1">
-                    <Clock className="w-4 h-4 text-gray-500" />
-                    <span className="text-sm text-gray-600">{formatTimeAgo(post.timestamp)}</span>
+                    <Clock className="w-3 h-3" />
+                    <span>{formatTimeAgo(post.timestamp)}</span>
                   </div>
-                  <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                  <div className={`px-2 py-1 rounded-full text-xs font-medium ${
                     (() => {
                       const age = Math.floor((new Date().getTime() - new Date(post.timestamp).getTime()) / (1000 * 60 * 60 * 24));
-                      return age <= 7 ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-gray-100 text-gray-800 border border-gray-200';
+                      return age <= 7 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800';
                     })()
                   }`}>
                     {(() => {
@@ -167,27 +154,12 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ posts }) => {
                   </div>
                 </div>
                 
-                {/* Image */}
                 {post.images.length > 0 && (
                   <img
                     src={post.images[0]}
                     alt="Laporan"
-                    className="w-full h-32 object-cover rounded-lg border border-gray-200"
+                    className="w-full h-24 object-cover rounded mt-2"
                   />
-                )}
-                
-                {/* Hashtags */}
-                {post.hashtags.length > 0 && (
-                  <div className="flex flex-wrap gap-1 mt-3">
-                    {post.hashtags.map((tag, index) => (
-                      <span
-                        key={index}
-                        className="text-xs text-teal-600 bg-teal-50 px-2 py-1 rounded-full border border-teal-200"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
                 )}
               </div>
             </Popup>
