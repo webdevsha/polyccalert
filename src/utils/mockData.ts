@@ -1,7 +1,7 @@
 import { User, Post, Category } from '../types';
 
 export const categories: Category[] = [
-  { id: '1', name: 'Lubang Jalan', icon: 'AlertTriangle', color: 'bg-red-500' },
+  { id: '1', name: 'Jalan Berlubang', icon: 'AlertTriangle', color: 'bg-red-500' },
   { id: '2', name: 'Lampu Jalan', icon: 'Lightbulb', color: 'bg-yellow-500' },
   { id: '3', name: 'Longkang', icon: 'Waves', color: 'bg-blue-500' },
   { id: '4', name: 'Papan Tanda', icon: 'Sign', color: 'bg-green-500' },
