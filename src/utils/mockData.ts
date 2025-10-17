@@ -41,8 +41,8 @@ export const mockPosts: Post[] = [
     images: ['https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&w=800'],
     videos: [],
     location: {
-      lat: 2.2685,
-      lng: 102.2656,
+      lat: 2.1498,
+      lng: 102.4309,
       address: 'Blok A, Politeknik Merlimau'
     },
     category: categories[0],

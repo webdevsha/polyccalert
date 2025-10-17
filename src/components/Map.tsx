@@ -1,6 +1,11 @@
 import React from 'react';
 import { MapPin, Navigation, Layers } from 'lucide-react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { mockPosts } from '../utils/mockData';
+import 'leaflet/dist/leaflet.css';
+
+// Coordinates for Politeknik Merlimau
+const POLITEKNIK_MERLIMAU_CENTER: [number, number] = [2.1498, 102.4309];
 
 const Map: React.FC = () => {
   return (
@@ -27,27 +32,38 @@ const Map: React.FC = () => {
         </div>
 
         {/* Map Container */}
-        <div className="relative h-96 lg:h-[600px] bg-gray-100">
-          {/* Placeholder Map */}
-          <div className="absolute inset-0 bg-gradient-to-br from-green-100 to-blue-100 flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-teal-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <MapPin className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-gray-800 mb-2">Peta Interaktif</h3>
-              <p className="text-gray-600 max-w-md">
-                Peta akan menunjukkan lokasi tepat setiap laporan masalah infrastruktur
-              </p>
-            </div>
-          </div>
+        <div className="h-96 lg:h-[600px]">
+          <MapContainer
+            center={POLITEKNIK_MERLIMAU_CENTER}
+            zoom={16}
+            style={{ height: '100%', width: '100%' }}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            {mockPosts.map((post) => (
+              <Marker 
+                key={post.id} 
+                position={[post.location.lat, post.location.lng]}
+              >
+                <Popup>
+                  <div className="max-w-xs">
+                    <h3 className="font-semibold">{post.title}</h3>
+                    <p className="text-sm text-gray-600">{post.description}</p>
+                    <p className="text-xs text-gray-500 mt-1">Status: {post.status}</p>
+                  </div>
+                </Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-          {/* Mock Map Markers */}
-          <div className="absolute top-1/4 left-1/4 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="bg-red-500 w-6 h-6 rounded-full border-2 border-white shadow-lg animate-pulse cursor-pointer hover:scale-110 transition-transform"></div>
-          </div>
-          <div className="absolute top-1/3 right-1/3 transform translate-x-1/2 -translate-y-1/2">
-            <div className="bg-yellow-500 w-6 h-6 rounded-full border-2 border-white shadow-lg animate-pulse cursor-pointer hover:scale-110 transition-transform"></div>
-          </div>
+export default Map;
           <div className="absolute bottom-1/3 left-1/2 transform -translate-x-1/2 translate-y-1/2">
             <div className="bg-green-500 w-6 h-6 rounded-full border-2 border-white shadow-lg animate-pulse cursor-pointer hover:scale-110 transition-transform"></div>
           </div>
