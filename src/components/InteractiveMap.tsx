@@ -51,13 +51,13 @@ const LocationButton: React.FC = () => {
         },
         (error) => {
           console.error('Error getting location:', error);
-          // Fallback to Merlimau Polytechnic coordinates
-          map.setView([2.2685, 102.2656], 16);
+          // Fallback to actual Merlimau Polytechnic coordinates
+          map.setView([2.167381021030418, 102.4304150369611], 16);
         }
       );
     } else {
-      // Fallback to Merlimau Polytechnic coordinates
-      map.setView([2.2685, 102.2656], 16);
+      // Fallback to actual Merlimau Polytechnic coordinates
+      map.setView([2.167381021030418, 102.4304150369611], 16);
     }
   };
 
@@ -79,8 +79,8 @@ interface InteractiveMapProps {
 const InteractiveMap: React.FC<InteractiveMapProps> = ({ posts }) => {
   const [selectedPost, setSelectedPost] = useState<any>(null);
   
-  // Merlimau Polytechnic coordinates
-  const center: LatLngExpression = [2.2685, 102.2656];
+  // Actual Merlimau Polytechnic coordinates
+  const center: LatLngExpression = [2.167381021030418, 102.4304150369611];
 
   const formatTimeAgo = (timestamp: string) => {
     const now = new Date();

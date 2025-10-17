@@ -13,8 +13,8 @@ Icon.Default.mergeOptions({
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-// Coordinates for Politeknik Merlimau
-const POLITEKNIK_MERLIMAU_CENTER: [number, number] = [2.1498, 102.4309];
+// Actual coordinates for Politeknik Merlimau
+const POLITEKNIK_MERLIMAU_CENTER: [number, number] = [2.167381021030418, 102.4304150369611];
 
 const LocalMap: React.FC = () => {
   return (

@@ -41,8 +41,8 @@ export const mockPosts: Post[] = [
     images: ['https://images.pexels.com/photos/2449665/pexels-photo-2449665.jpeg?auto=compress&cs=tinysrgb&w=800'],
     videos: [],
     location: {
-      lat: 2.1498,
-      lng: 102.4309,
+      lat: 2.167381021030418,
+      lng: 102.4304150369611,
       address: 'Blok A, Politeknik Merlimau'
     },
     category: categories[0],
@@ -67,8 +67,8 @@ export const mockPosts: Post[] = [
     images: ['https://images.pexels.com/photos/1405963/pexels-photo-1405963.jpeg?auto=compress&cs=tinysrgb&w=800'],
     videos: [],
     location: {
-      lat: 2.2690,
-      lng: 102.2660,
+      lat: 2.167581021030418,
+      lng: 102.4306150369611,
       address: 'Kawasan Parkir Utama, Politeknik Merlimau'
     },
     category: categories[1],
@@ -85,8 +85,8 @@ export const mockPosts: Post[] = [
     images: ['https://images.pexels.com/photos/1029806/pexels-photo-1029806.jpeg?auto=compress&cs=tinysrgb&w=800'],
     videos: [],
     location: {
-      lat: 2.2680,
-      lng: 102.2650,
+      lat: 2.167181021030418,
+      lng: 102.4302150369611,
       address: 'Blok C, Politeknik Merlimau'
     },
     category: categories[0],
