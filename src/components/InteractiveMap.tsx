@@ -116,38 +116,48 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ posts }) => {
               click: () => setSelectedPost(post),
             }}
           >
-            <Popup className="custom-popup">
-              <div className="p-2 min-w-[250px]">
+            <Popup className="custom-popup" maxWidth={350} minWidth={300}>
+              <div className="p-4 min-w-[300px]">
+                {/* User Header */}
                 <div className="flex items-center space-x-2 mb-2">
                   <img
                     src={post.user.avatar}
                     alt={post.user.name}
-                    className="w-8 h-8 rounded-full object-cover"
+                    className="w-10 h-10 rounded-full object-cover border-2 border-gray-200"
                   />
                   <div>
-                    <p className="font-semibold text-sm">{post.user.name}</p>
-                    <p className="text-xs text-gray-500">{post.user.role}</p>
+                    <p className="font-bold text-base text-gray-900">{post.user.name}</p>
+                    <p className="text-sm text-gray-600">{post.user.role}</p>
                   </div>
                 </div>
                 
-                <p className="text-sm text-gray-800 mb-2 line-clamp-3">
+                {/* Content */}
+                <p className="text-sm text-gray-800 mb-3 leading-relaxed">
                   {post.content}
                 </p>
                 
-                <div className="flex items-center space-x-2 mb-2">
+                {/* Category */}
+                <div className="flex items-center space-x-2 mb-3">
                   <div className={`w-3 h-3 rounded-full ${post.category.color}`}></div>
-                  <span className="text-xs font-medium text-gray-700">{post.category.name}</span>
+                  <span className="text-sm font-semibold text-gray-800">{post.category.name}</span>
                 </div>
                 
-                <div className="flex items-center justify-between text-xs text-gray-500">
+                {/* Location */}
+                <div className="flex items-center space-x-2 mb-3">
+                  <MapPin className="w-4 h-4 text-gray-500" />
+                  <span className="text-sm text-gray-600">{post.location.address}</span>
+                </div>
+                
+                {/* Timestamp and Status */}
+                <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center space-x-1">
-                    <Clock className="w-3 h-3" />
-                    <span>{formatTimeAgo(post.timestamp)}</span>
+                    <Clock className="w-4 h-4 text-gray-500" />
+                    <span className="text-sm text-gray-600">{formatTimeAgo(post.timestamp)}</span>
                   </div>
-                  <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
                     (() => {
                       const age = Math.floor((new Date().getTime() - new Date(post.timestamp).getTime()) / (1000 * 60 * 60 * 24));
-                      return age <= 7 ? 'bg-red-100 text-red-800' : 'bg-gray-100 text-gray-800';
+                      return age <= 7 ? 'bg-red-100 text-red-800 border border-red-200' : 'bg-gray-100 text-gray-800 border border-gray-200';
                     })()
                   }`}>
                     {(() => {
@@ -157,11 +167,26 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ posts }) => {
                   </div>
                 </div>
                 
+                {/* Image */}
                 {post.images.length > 0 && (
                   <img
                     src={post.images[0]}
                     alt="Laporan"
-                    className="w-full h-24 object-cover rounded mt-2"
+                    className="w-full h-32 object-cover rounded-lg border border-gray-200"
+                  />
+                )}
+                
+                {/* Hashtags */}
+                {post.hashtags.length > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-3">
+                    {post.hashtags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="text-xs text-teal-600 bg-teal-50 px-2 py-1 rounded-full border border-teal-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   />
                 )}
               </div>
