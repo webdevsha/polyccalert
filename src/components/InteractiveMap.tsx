@@ -187,7 +187,7 @@ const InteractiveMap: React.FC<InteractiveMapProps> = ({ posts }) => {
                         {tag}
                       </span>
                     ))}
-                  />
+                  </div>
                 )}
               </div>
             </Popup>
